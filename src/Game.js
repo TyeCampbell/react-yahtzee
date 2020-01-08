@@ -31,6 +31,7 @@ class Game extends Component {
     };
     this.roll = this.roll.bind(this);
     this.doScore = this.doScore.bind(this);
+    this.toggleLocked = this.toggleLocked.bind(this);
   }
 
   roll(evt) {
@@ -75,7 +76,7 @@ class Game extends Component {
             <Dice
               dice={this.state.dice}
               locked={this.state.locked}
-              handleClick={this.toggleLocked}
+              toggleLocked={this.toggleLocked}
             />
             <div className='Game-button-wrapper'>
               <button
