@@ -48,6 +48,7 @@ class TotalOneNumber extends Rule {
  * Used for rules like "sum of all dice when there is a 3-of-kind"
  */
 
+ 
 class SumDistro extends Rule {
   evalRoll = dice => {
     // do any of the counts meet of exceed this distro?
@@ -55,10 +56,14 @@ class SumDistro extends Rule {
   };
 }
 
-/** Check if full house (3-of-kind and 2-of-kind) */
+/** Check if full house  */
 
-class FullHouse {
-  // TODO
+class FullHouse extends Rule {
+  evalRoll = dice => {
+    const d = new Set(this.freq(dice));
+
+    return d.size === 2 && (d.has(2) && d.has(3)) ? this.score : 0; 
+  }
 }
 
 /** Check for small straights. */
@@ -67,7 +72,7 @@ class SmallStraight extends Rule {
   evalRoll = dice => {
     const d = new Set(dice); 
 
-    // small straight must be 4 different dice & only one can be a 1, 2, 5 or 6
+    // small straight must be 4 different dice & only one can be a 1, 2, 3, 4 or 2, 3, 4, 5 or 3, 4, 5, 6
     return d.size === 4 && ((!d.has(1) && !d.has(2)) || (!d.has(1) && !d.has(6)) || (!d.has(5) && !d.has(6)) ) ? this.score : 0;
 
   };
@@ -106,7 +111,7 @@ const threeOfKind = new SumDistro({ count: 3 });
 const fourOfKind = new SumDistro({ count: 4 });
 
 // full house scores as flat 25
-const fullHouse = "TODO";
+const fullHouse = new FullHouse({ score: 25 });
 
 // small/large straights score as 30/40
 const smallStraight = new SmallStraight({ score: 30 });
