@@ -60,6 +60,7 @@ class Game extends Component {
 
   doScore(rulename, ruleFn) {
     // evaluate this ruleFn with the dice and score this rulename
+    // only allows an update to the score card if the vaule has not yet been set. 
     if (this.state.scores[rulename] === undefined) {
       this.setState(st => ({
         scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
