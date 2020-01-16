@@ -1,5 +1,5 @@
 /* Original Styles For Numbers, before icons added in */
-.Die {
+/* .Die {
   font-size: 25px;
   display: inline-block;
   padding: 0.5em 0.8em;
@@ -8,19 +8,24 @@
   background-color: black;
   color: white;
   margin-right: 1em;
-}
+} */
 
 /* THE NICER STYLES MADE FOR THE FONT-AWESOME ICONS... */
 
-/* .Die {
+.Die {
   color: white;
+  padding-left: .1em;
+  padding-right: .1em;
+  font-size: 4em;
   text-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .Die-locked {
-  opacity: 0.5;
+  color: black;
+  opacity: 0.6;
   text-shadow: none;
+  transition: all 0.3s ease;
 }
 
 .Die:not(.Die-locked):hover {
@@ -43,4 +48,4 @@
   100% {
     transform: rotate(360deg);
   }
-} */
+}
