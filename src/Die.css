@@ -32,13 +32,34 @@
   cursor: pointer;
   opacity: 0.8;
 }
-.Die-rolling {
-  animation: spin 1s ease-out;
-}
 
 .Die-rolling:hover,
 .Die[disabled] {
   cursor: not-allowed;
+}
+
+.Die-rolling {
+  animation: shake 0.9s;
+  animation-iteration-count: 1;
+}
+
+@keyframes shake {
+	0% {transform: translate(40px,5px) rotate(8deg);}
+    10% {transform: translate(-40px,-5px) rotate(-8deg);}
+    20% {transform: translate(35px,4px) rotate(6deg);}
+    30% {transform: translate(-35px,-4px) rotate(-6deg);}
+    40% {transform: translate(30px,3px) rotate(5deg);}
+    50% {transform: translate(-30px, -3px) rotate(-5deg);}
+    60% {transform: translate(20px, 2px) rotate(3deg);}
+    70% {transform: translate(-20px, -2px) rotate(-3deg);}
+    80% {transform: translate(10px, 1px) rotate(1deg);}
+    90% {transform: translate(-10px, -1px) rotate(-1deg);}
+    100% {transform: translate(0px, 0px) rotate(0deg);}
+}
+
+
+/* .Die-rolling {
+  animation: spin 1s ease-out;
 }
 
 @keyframes spin {
@@ -48,4 +69,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
+} */

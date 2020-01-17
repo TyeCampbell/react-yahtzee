@@ -101,6 +101,7 @@ class Game extends Component {
                 onClick={this.roll}
               >
                 {this.state.rollsLeft} Rolls Left
+                
                 {/* {this.state.isRolling ? 'Rolling...' : this.state.rollsLeft + ' Rerolls Left'} */}
               </button>
             </div>
