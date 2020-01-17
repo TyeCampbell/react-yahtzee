@@ -44,13 +44,19 @@ class Game extends Component {
         dice: st.dice.map((d, i) =>
           st.locked[i] ? d : Math.ceil(Math.random() * 6)
         ),
-        locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
-        rollsLeft: st.rollsLeft - 1
+        // locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
+        // rollsLeft: st.rollsLeft - 1
       }));
     }, 100)
 
     setTimeout(() => {
-      this.setState({isRolling: false})
+      //this.setState({isRolling: false})
+      this.setState(st => ({
+        isRolling: false,
+        locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
+        rollsLeft: st.rollsLeft - 1,
+      }));
+
     }, 1000);
 
   }
@@ -101,7 +107,7 @@ class Game extends Component {
                 onClick={this.roll}
               >
                 {this.state.rollsLeft} Rolls Left
-                
+
                 {/* {this.state.isRolling ? 'Rolling...' : this.state.rollsLeft + ' Rerolls Left'} */}
               </button>
             </div>
