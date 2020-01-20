@@ -36,6 +36,9 @@ class Game extends Component {
   }
 
   roll(evt) {
+
+    console.log(this.gameOver());
+
     // roll dice whose indexes are in reroll
     this.setState({isRolling: true});
 
@@ -44,13 +47,10 @@ class Game extends Component {
         dice: st.dice.map((d, i) =>
           st.locked[i] ? d : Math.ceil(Math.random() * 6)
         ),
-        // locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
-        // rollsLeft: st.rollsLeft - 1
       }));
     }, 100)
 
     setTimeout(() => {
-      //this.setState({isRolling: false})
       this.setState(st => ({
         isRolling: false,
         locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
@@ -58,6 +58,13 @@ class Game extends Component {
       }));
 
     }, 1000);
+
+  }
+
+  gameOver() {
+    const scores = Object.values(this.state.scores)
+    
+    return scores.every( idx => idx !== undefined)
 
   }
 
