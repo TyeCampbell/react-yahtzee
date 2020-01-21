@@ -58,12 +58,19 @@ h2 {
   color: white;
 }
 
-.Game-header {
+.Game-header, .Game-footer {
   width: 100%;
   background: linear-gradient(-45deg, #673ab7, #9c27b0);
   -webkit-animation: Gradient 15s ease infinite;
   -moz-animation: Gradient 15s ease infinite;
   animation: Gradient 15s ease infinite;
+}
+
+.Game-score {
+  color: white;
+  border-bottom: none;
+  font-size: 1.5em;
+  transition: all 0.3s ease;
 }
 
 @keyframes Gradient {

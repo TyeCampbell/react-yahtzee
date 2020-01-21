@@ -66,6 +66,18 @@ class Game extends Component {
     return scores.every( idx => idx !== undefined)
   }
 
+  tallyCurrentScore() {
+    const scores = Object.values(this.state.scores)
+    let totalScore = 0; 
+
+    scores.forEach(idx => {
+      if (idx !== undefined) {
+        totalScore += idx
+      }
+    })
+    return totalScore
+  }
+
   newGame() {
     this.setState({
       rollsLeft: NUM_ROLLS, 
@@ -113,6 +125,10 @@ class Game extends Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log(this.tallyCurrentScore())
+  }
+
   render() {
     return (
       <div className='Game'>
@@ -140,6 +156,10 @@ class Game extends Component {
           </section>
         </header>
         <ScoreTable doScore={this.doScore} scores={this.state.scores} />
+        <footer className="Game-footer">   
+          <h2 className="Game-score">{this.isGameOver() ? 'Final Score: ' : 'Current Score: '}{this.tallyCurrentScore()} </h2>
+
+        </footer>
       </div>
     );
   }
