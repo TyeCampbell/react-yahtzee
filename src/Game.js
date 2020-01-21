@@ -37,8 +37,6 @@ class Game extends Component {
 
   roll(evt) {
 
-    console.log(this.gameOver());
-
     // roll dice whose indexes are in reroll
     this.setState({isRolling: true});
 
@@ -61,11 +59,32 @@ class Game extends Component {
 
   }
 
-  gameOver() {
+  // Checks to see if game is over based on all the scores being filled in
+  isGameOver() {
     const scores = Object.values(this.state.scores)
     
     return scores.every( idx => idx !== undefined)
+  }
 
+  newGame() {
+    this.setState({
+      rollsLeft: NUM_ROLLS, 
+      scores: {
+        ones: undefined,
+        twos: undefined,
+        threes: undefined,
+        fours: undefined,
+        fives: undefined,
+        sixes: undefined,
+        threeOfKind: undefined,
+        fourOfKind: undefined,
+        fullHouse: undefined,
+        smallStraight: undefined,
+        largeStraight: undefined,
+        yahtzee: undefined,
+        chance: undefined
+      }
+    })
   }
 
   toggleLocked(idx) {
