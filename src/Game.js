@@ -21,6 +21,7 @@ class Game extends Component {
         fours: undefined,
         fives: undefined,
         sixes: undefined,
+        upperBonus: undefined,
         threeOfKind: undefined,
         fourOfKind: undefined,
         fullHouse: undefined,
@@ -59,6 +60,20 @@ class Game extends Component {
 
   }
 
+  addUpperScores(){
+    const score = this.state.scores
+    const upperScores = [score.ones, score.twos, score.threes, score.fours, score.fives, score.sixes ]; 
+    let totalUpperScore = 0; 
+
+    upperScores.forEach(idx => {
+      if(idx !== undefined) {
+        totalUpperScore += idx
+      }
+    })
+
+    return totalUpperScore;
+  }
+
   // Checks to see if game is over based on all the scores being filled in
   isGameOver() {
     const scores = Object.values(this.state.scores)
@@ -88,6 +103,7 @@ class Game extends Component {
         fours: undefined,
         fives: undefined,
         sixes: undefined,
+        upperBonus: undefined,
         threeOfKind: undefined,
         fourOfKind: undefined,
         fullHouse: undefined,
@@ -121,12 +137,20 @@ class Game extends Component {
         rollsLeft: NUM_ROLLS,
         locked: Array(NUM_DICE).fill(false)
       }));
+    
+    // add in bonus score for upper section if score is 63 or greater
+    if (this.addUpperScores() >= 63 ) {
+        this.setState(st => ({
+          scores: { ...st.scores, upperBonus: 35},
+        }));
+      }  
+
       this.roll();
     }
   }
 
   componentDidUpdate() {
-    console.log(this.tallyCurrentScore())
+    console.log(this.addUpperScores())
   }
 
   render() {
@@ -149,13 +173,13 @@ class Game extends Component {
                 onClick={this.roll}
               >
                 {this.state.rollsLeft} Rolls Left
-
-                {/* {this.state.isRolling ? 'Rolling...' : this.state.rollsLeft + ' Rerolls Left'} */}
               </button>
             </div>
           </section>
         </header>
+
         <ScoreTable doScore={this.doScore} scores={this.state.scores} />
+        
         <footer className="Game-footer">   
           <h2 className="Game-score">{this.isGameOver() ? 'Final Score: ' : 'Current Score: '}{this.tallyCurrentScore()} </h2>
 

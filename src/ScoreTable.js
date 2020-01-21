@@ -21,6 +21,7 @@ class ScoreTable extends Component {
               <RuleRow name="Fours" description="Count and Add Only Fours" score={scores.fours} doScore={evt => doScore("fours", fours.evalRoll)} />
               <RuleRow name="Fives" description="Count and Add Only Fives" score={scores.fives} doScore={evt => doScore("fives", fives.evalRoll)} />
               <RuleRow name="Sixes" description="Count and Add Only Sixes" score={scores.sixes} doScore={evt => doScore("sixes", sixes.evalRoll)} />
+              <RuleRow name="Bonus" className="ScoreTable-bonus" description="If total score is 63 or over"/> 
             </tbody>
           </table>
         </section>
