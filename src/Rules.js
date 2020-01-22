@@ -73,23 +73,6 @@ class SmallStraight extends Rule {
     const d = new Set(dice); 
 
     // small straight must be 4 different dice & only one can be a 1, 2, 3, 4 or 2, 3, 4, 5 or 3, 4, 5, 6
-    console.group('old logic')
-    console.log(d);
-    console.log(d.size === 4 && ((!d.has(1) && !d.has(2)) || (!d.has(1) && !d.has(6)) || (!d.has(5) && !d.has(6))));
-    console.log(d.size === 4);
-    console.log(((!d.has(1) && !d.has(2)) || (!d.has(1) && !d.has(6)) || (!d.has(5) && !d.has(6)) ));
-    console.groupEnd()
-    //return d.size === 4 && ((!d.has(1) && !d.has(2)) || (!d.has(1) && !d.has(6)) || (!d.has(5) && !d.has(6))) ? this.score : 0;
-    console.group("new logic");
-    console.log(d.size === 4 && d.has(1) && d.has(2) && d.has(3) && d.has(4));
-    console.log(d.size === 4 && d.has(2) && d.has(3) && d.has(4) && d.has(5));
-    console.log(d.size === 4 && d.has(3) && d.has(4) && d.has(5) && d.has(6));
-    console.log("test without size");
-    console.log(d.has(1) && d.has(2) && d.has(3) && d.has(4));
-    console.log(d.has(2) && d.has(3) && d.has(4) && d.has(5));
-    console.log(d.has(3) && d.has(4) && d.has(5) && d.has(6));
-    console.groupEnd();
-
     return ((d.has(1) && d.has(2) && d.has(3) && d.has(4)) || (d.has(2) && d.has(3) && d.has(4) && d.has(5)) || (d.has(3) && d.has(4) && d.has(5) && d.has(6))) ? this.score : 0;
   };
 }
