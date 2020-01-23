@@ -34,6 +34,8 @@ class Game extends Component {
     this.roll = this.roll.bind(this);
     this.doScore = this.doScore.bind(this);
     this.toggleLocked = this.toggleLocked.bind(this);
+    this.isGameOver = this.isGameOver.bind(this);
+    this.totalGameScore = this.totalGameScore.bind(this);
   }
 
   roll(evt) {
@@ -81,7 +83,7 @@ class Game extends Component {
     return scores.every( idx => idx !== undefined)
   }
 
-  tallyCurrentScore() {
+  totalGameScore() {
     const scores = Object.values(this.state.scores)
     let totalScore = 0; 
 
@@ -178,10 +180,10 @@ class Game extends Component {
           </section>
         </header>
 
-        <ScoreTable doScore={this.doScore} scores={this.state.scores} />
+        <ScoreTable doScore={this.doScore} scores={this.state.scores} isGameOver={this.isGameOver()} totalGameScore={this.totalGameScore()}/>
         
         <footer className="Game-footer">   
-          <h2 className="Game-score">{this.isGameOver() ? 'Final Score: ' : 'Current Score: '}{this.tallyCurrentScore()} </h2>
+          <h2 className="Game-score">{this.isGameOver() ? 'Final Score: ' : 'Current Score: '}{this.totalGameScore()} </h2>
 
         </footer>
       </div>

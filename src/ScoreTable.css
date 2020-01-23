@@ -21,3 +21,7 @@
 .ScoreTable-section-lower {
   padding-bottom: 2rem;
 }
+
+.ScoreTable-gameTotal {
+    font-size: 1.8rem; 
+}

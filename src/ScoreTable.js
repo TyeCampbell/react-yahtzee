@@ -21,7 +21,7 @@ class ScoreTable extends Component {
               <RuleRow name="Fours" description="Count and Add Only Fours" score={scores.fours} doScore={evt => doScore("fours", fours.evalRoll)} />
               <RuleRow name="Fives" description="Count and Add Only Fives" score={scores.fives} doScore={evt => doScore("fives", fives.evalRoll)} />
               <RuleRow name="Sixes" description="Count and Add Only Sixes" score={scores.sixes} doScore={evt => doScore("sixes", sixes.evalRoll)} />
-              <RuleRow name="Bonus" className="ScoreTable-bonus" description="If total score is 63 or over"/> 
+              <RuleRow name="Bonus" additionalClass="ScoreTable-bonus" description="If total score is 63 or over"/> 
             </tbody>
           </table>
         </section>
@@ -36,6 +36,7 @@ class ScoreTable extends Component {
               <RuleRow name="Large Straight" description="Score 40" score={scores.largeStraight} doScore={evt => doScore("largeStraight", largeStraight.evalRoll)} />
               <RuleRow name="Yahtzee" description="Score 50" score={scores.yahtzee} doScore={evt => doScore("yahtzee", yahtzee.evalRoll)} />
               <RuleRow name="Chance" description="Score Total of All Dice" score={scores.chance} doScore={evt => doScore("chance", chance.evalRoll)} />
+              <RuleRow name={this.props.isGameOver ? 'Final Score: ' : 'Current Score: '} additionalClass="ScoreTable-gameTotal" score={this.props.totalGameScore === 0 ? '' : this.props.totalGameScore}/> 
             </tbody>
           </table>
         </section>
