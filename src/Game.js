@@ -36,6 +36,8 @@ class Game extends Component {
     this.toggleLocked = this.toggleLocked.bind(this);
     this.isGameOver = this.isGameOver.bind(this);
     this.totalGameScore = this.totalGameScore.bind(this);
+    this.newGame = this.newGame.bind(this);
+    this.confirmNewGame = this.confirmNewGame.bind(this);
   }
 
   roll(evt) {
@@ -95,7 +97,14 @@ class Game extends Component {
     return totalScore
   }
 
-  newGame() {
+  confirmNewGame() {
+    const startNewGame = window.confirm("End current game and start a new game?");
+    if(startNewGame) {
+      this.newGame();
+    }
+  }
+
+  newGame() {    
     this.setState({
       rollsLeft: NUM_ROLLS, 
       scores: {
@@ -115,6 +124,8 @@ class Game extends Component {
         chance: undefined
       }
     })
+
+    this.roll();
   }
 
   toggleLocked(idx) {
@@ -182,9 +193,8 @@ class Game extends Component {
 
         <ScoreTable doScore={this.doScore} scores={this.state.scores} isGameOver={this.isGameOver()} totalGameScore={this.totalGameScore()}/>
         
-        <footer className="Game-footer">   
-          <h2 className="Game-score">{this.isGameOver() ? 'Final Score: ' : 'Current Score: '}{this.totalGameScore()} </h2>
-
+        <footer className='Game-footer'>   
+          <button className='Game-NewGame' onClick={this.confirmNewGame}>New Game</button> 
         </footer>
       </div>
     );
