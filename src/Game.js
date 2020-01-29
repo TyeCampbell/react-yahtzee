@@ -21,7 +21,7 @@ class Game extends Component {
         fours: undefined,
         fives: undefined,
         sixes: undefined,
-        upperBonus: undefined,
+        upperBonusScore: undefined,
         threeOfKind: undefined,
         fourOfKind: undefined,
         fullHouse: undefined,
@@ -38,6 +38,7 @@ class Game extends Component {
     this.totalGameScore = this.totalGameScore.bind(this);
     this.newGame = this.newGame.bind(this);
     this.confirmNewGame = this.confirmNewGame.bind(this);
+    this.applyUpperScoreBonus = this.applyUpperScoreBonus.bind(this);
   }
 
   roll(evt) {
@@ -64,19 +65,6 @@ class Game extends Component {
 
   }
 
-  addUpperScores(){
-    const score = this.state.scores
-    const upperScores = [score.ones, score.twos, score.threes, score.fours, score.fives, score.sixes ]; 
-    let totalUpperScore = 0; 
-
-    upperScores.forEach(idx => {
-      if(idx !== undefined) {
-        totalUpperScore += idx
-      }
-    })
-
-    return totalUpperScore;
-  }
 
   // Checks to see if game is over based on all the scores being filled in
   isGameOver() {
@@ -114,7 +102,7 @@ class Game extends Component {
         fours: undefined,
         fives: undefined,
         sixes: undefined,
-        upperBonus: undefined,
+        upperBonusScore: undefined,
         threeOfKind: undefined,
         fourOfKind: undefined,
         fullHouse: undefined,
@@ -127,7 +115,7 @@ class Game extends Component {
 
     this.roll();
   }
-
+  
   toggleLocked(idx) {
     // toggle whether idx is in locked or not
     if(this.state.rollsLeft !== 0) {
@@ -140,31 +128,53 @@ class Game extends Component {
       }));
     }
   }
-
+  
   doScore(rulename, ruleFn) {
     // evaluate this ruleFn with the dice and score this rulename
     // only allows an update to the score card if the vaule has not yet been set. 
+    
     if (this.state.scores[rulename] === undefined) {
       this.setState(st => ({
-        scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
+        scores: { ...st.scores, [rulename]: ruleFn(this.state.dice)},
         rollsLeft: NUM_ROLLS,
         locked: Array(NUM_DICE).fill(false)
-      }));
-    
-    // add in bonus score for upper section if score is 63 or greater
-    if (this.addUpperScores() >= 63 ) {
-        this.setState(st => ({
-          scores: { ...st.scores, upperBonus: 35},
-        }));
-      }  
-
+      }), () => this.applyUpperScoreBonus());
+      
       this.roll();
     }
   }
 
-  componentDidUpdate() {
-    console.log(this.addUpperScores())
+  applyUpperScoreBonus() {
+    
+    const st = this.state.scores;
+    const upperArrayScores = [st.ones, st.twos, st.threes, st.fours, st.fives, st.sixes];
+    let totalUpperScore = 0; 
+  
+    upperArrayScores.forEach(idx => {
+      if(idx !== undefined) {
+        totalUpperScore += idx
+      }
+    })
+
+    console.log('Upper Score Total: ' + totalUpperScore)
+    console.log('Upper Array Scores Filled In: ' + upperArrayScores.every(idx => idx !== undefined));
+
+    if(upperArrayScores.every(idx => idx !== undefined)) {
+      //if the total is more than 63, apply bonus of 35 otherwise 0
+
+       this.setState(st => ({
+        scores: { ...st.scores, upperBonusScore: totalUpperScore >= 63 ? 35 : 0},
+      }));
+
+      } 
+
   }
+
+
+  componentDidUpdate() {
+    console.log("Is game over: " + this.isGameOver())
+  }
+
 
   render() {
     return (
