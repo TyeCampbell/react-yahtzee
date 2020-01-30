@@ -65,7 +65,6 @@ class Game extends Component {
 
   }
 
-
   // Checks to see if game is over based on all the scores being filled in
   isGameOver() {
     const scores = Object.values(this.state.scores)
@@ -94,7 +93,9 @@ class Game extends Component {
 
   newGame() {    
     this.setState({
-      rollsLeft: NUM_ROLLS, 
+      rollsLeft: NUM_ROLLS,
+      locked: Array(NUM_DICE).fill(false), 
+      rollsLeft: NUM_ROLLS,
       scores: {
         ones: undefined,
         twos: undefined,
@@ -173,6 +174,11 @@ class Game extends Component {
 
   componentDidUpdate() {
     console.log("Is game over: " + this.isGameOver())
+    localStorage.setItem('currentGame', JSON.stringify(this.state));
+    console.log(this.state);
+
+  componentDidMount() {
+
   }
 
 
