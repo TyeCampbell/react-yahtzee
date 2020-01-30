@@ -174,13 +174,29 @@ class Game extends Component {
 
   componentDidUpdate() {
     console.log("Is game over: " + this.isGameOver())
-    localStorage.setItem('currentGame', JSON.stringify(this.state));
-    console.log(this.state);
-
-  componentDidMount() {
-
+    localStorage.setItem('saveDice', JSON.stringify(this.state.dice));
+    localStorage.setItem('saveLocked', JSON.stringify(this.state.locked));
+    localStorage.setItem('saveRollsLeft', JSON.stringify(this.state.rollsLeft));
+    localStorage.setItem('saveScores', JSON.stringify(this.state.scores));
   }
 
+  componentDidMount() {
+    const savedDice = localStorage.getItem('saveDice');
+    const savedLocked = localStorage.getItem('saveLocked'); 
+    const savedRollsLeft = localStorage.getItem('saveRollsLeft');
+    const savedScores = localStorage.getItem('saveScores');
+
+    if (savedDice !== null) {
+      this.setState({
+        dice: JSON.parse(savedDice),
+        locked: JSON.parse(savedLocked),
+        rollsLeft: JSON.parse(savedRollsLeft),
+        isRolling: false,
+        scores: JSON.parse(savedScores)
+      })
+    }
+
+  }
 
   render() {
     return (
