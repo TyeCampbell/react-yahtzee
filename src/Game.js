@@ -68,8 +68,8 @@ class Game extends Component {
   // Checks to see if game is over based on all the scores being filled in
   isGameOver() {
     const scores = Object.values(this.state.scores)
-    
-    return scores.every( idx => idx !== undefined)
+    console.log(scores)
+    return scores.every( idx => idx !== undefined);
   }
 
   totalGameScore() {
@@ -95,7 +95,6 @@ class Game extends Component {
     this.setState({
       rollsLeft: NUM_ROLLS,
       locked: Array(NUM_DICE).fill(false), 
-      rollsLeft: NUM_ROLLS,
       scores: {
         ones: undefined,
         twos: undefined,
@@ -157,23 +156,16 @@ class Game extends Component {
       }
     })
 
-    console.log('Upper Score Total: ' + totalUpperScore)
-    console.log('Upper Array Scores Filled In: ' + upperArrayScores.every(idx => idx !== undefined));
-
     if(upperArrayScores.every(idx => idx !== undefined)) {
       //if the total is more than 63, apply bonus of 35 otherwise 0
-
        this.setState(st => ({
         scores: { ...st.scores, upperBonusScore: totalUpperScore >= 63 ? 35 : 0},
       }));
-
       } 
-
   }
 
   //stores state to local storage for future games
   componentDidUpdate() {
-    console.log("Is game over: " + this.isGameOver())
     localStorage.setItem('saveDice', JSON.stringify(this.state.dice));
     localStorage.setItem('saveLocked', JSON.stringify(this.state.locked));
     localStorage.setItem('saveRollsLeft', JSON.stringify(this.state.rollsLeft));
@@ -220,7 +212,7 @@ class Game extends Component {
             </div>
           </section>
 
-    if(!this.isGameOver) {
+    if(this.isGameOver()) {
       gameState = 
       <section>
         <h2>Game Over</h2>
