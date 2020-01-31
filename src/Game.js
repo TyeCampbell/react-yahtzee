@@ -171,7 +171,7 @@ class Game extends Component {
 
   }
 
-
+  //stores state to local storage for future games
   componentDidUpdate() {
     console.log("Is game over: " + this.isGameOver())
     localStorage.setItem('saveDice', JSON.stringify(this.state.dice));
@@ -180,6 +180,7 @@ class Game extends Component {
     localStorage.setItem('saveScores', JSON.stringify(this.state.scores));
   }
 
+  //retrieve the data from local storage if it exists
   componentDidMount() {
     const savedDice = localStorage.getItem('saveDice');
     const savedLocked = localStorage.getItem('saveLocked'); 
@@ -199,12 +200,9 @@ class Game extends Component {
   }
 
   render() {
-    return (
-      <div className='Game'>
-        <header className='Game-header'>
-          <h1 className='App-title'>Yahtzee!</h1>
 
-          <section className='Game-dice-section'>
+    let gameState = 
+            <section className='Game-dice-section'>
             <Dice
               dice={this.state.dice}
               locked={this.state.locked}
@@ -221,6 +219,22 @@ class Game extends Component {
               </button>
             </div>
           </section>
+
+    if(!this.isGameOver) {
+      gameState = 
+      <section>
+        <h2>Game Over</h2>
+        <p>Your final score: {this.totalGameScore()}!</p>
+        <button onClick={this.newGame}>Start New Game?</button>
+      </section>
+    }
+
+
+    return (
+      <div className='Game'>
+        <header className='Game-header'>
+          <h1 className='App-title'>Yahtzee!</h1>
+          {gameState}
         </header>
 
         <ScoreTable doScore={this.doScore} scores={this.state.scores} isGameOver={this.isGameOver()} totalGameScore={this.totalGameScore()}/>
