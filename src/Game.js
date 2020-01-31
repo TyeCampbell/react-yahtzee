@@ -65,13 +65,6 @@ class Game extends Component {
 
   }
 
-  // Checks to see if game is over based on all the scores being filled in
-  isGameOver() {
-    const scores = Object.values(this.state.scores)
-    console.log(scores)
-    return scores.every( idx => idx !== undefined);
-  }
-
   totalGameScore() {
     const scores = Object.values(this.state.scores)
     let totalScore = 0; 
@@ -164,12 +157,19 @@ class Game extends Component {
       } 
   }
 
+    // Checks to see if game is over based on all the scores being filled in
+  isGameOver() {
+    const scores = Object.values(this.state.scores)
+    console.log(scores)
+    return scores.every( idx => idx !== undefined);
+  }
+
   //stores state to local storage for future games
   componentDidUpdate() {
     localStorage.setItem('saveDice', JSON.stringify(this.state.dice));
     localStorage.setItem('saveLocked', JSON.stringify(this.state.locked));
     localStorage.setItem('saveRollsLeft', JSON.stringify(this.state.rollsLeft));
-    localStorage.setItem('saveScores', JSON.stringify(this.state.scores));
+    localStorage.setItem('saveScores', JSON.stringify(this.state.scores, (k, v) => v === undefined ? null : v));
   }
 
   //retrieve the data from local storage if it exists
@@ -178,6 +178,8 @@ class Game extends Component {
     const savedLocked = localStorage.getItem('saveLocked'); 
     const savedRollsLeft = localStorage.getItem('saveRollsLeft');
     const savedScores = localStorage.getItem('saveScores');
+
+
 
     if (savedDice !== null) {
       this.setState({
