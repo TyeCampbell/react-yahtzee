@@ -174,20 +174,20 @@ class Game extends Component {
 
   //retrieve the data from local storage if it exists
   componentDidMount() {
-    const savedDice = localStorage.getItem('saveDice');
-    const savedLocked = localStorage.getItem('saveLocked'); 
-    const savedRollsLeft = localStorage.getItem('saveRollsLeft');
-    const savedScores = localStorage.getItem('saveScores');
-
+    const savedDice = JSON.parse(localStorage.getItem('saveDice'));
+    const savedLocked = JSON.parse(localStorage.getItem('saveLocked')); 
+    const savedRollsLeft = JSON.parse(localStorage.getItem('saveRollsLeft'));
+    const savedScores = JSON.parse(localStorage.getItem('saveScores'));
+    
 
 
     if (savedDice !== null) {
       this.setState({
-        dice: JSON.parse(savedDice),
-        locked: JSON.parse(savedLocked),
-        rollsLeft: JSON.parse(savedRollsLeft),
+        dice: savedDice,
+        locked: savedLocked,
+        rollsLeft: savedRollsLeft,
         isRolling: false,
-        scores: JSON.parse(savedScores)
+        scores: savedScores,
       })
     }
 
