@@ -219,7 +219,7 @@ class Game extends Component {
 
     if(this.isGameOver()) {
       gameState = 
-      <section>
+      <section className='Game-gameOver-section'>
         <h2>Game Over</h2>
         <p>Your final score: {this.totalGameScore()}!</p>
         <button onClick={this.newGame}>Start New Game?</button>
