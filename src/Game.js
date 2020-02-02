@@ -160,7 +160,6 @@ class Game extends Component {
     // Checks to see if game is over based on all the scores being filled in
   isGameOver() {
     const scores = Object.values(this.state.scores)
-    console.log(scores)
     return scores.every( idx => idx !== undefined);
   }
 
@@ -177,9 +176,13 @@ class Game extends Component {
     const savedDice = JSON.parse(localStorage.getItem('saveDice'));
     const savedLocked = JSON.parse(localStorage.getItem('saveLocked')); 
     const savedRollsLeft = JSON.parse(localStorage.getItem('saveRollsLeft'));
-    const savedScores = JSON.parse(localStorage.getItem('saveScores'));
+    const rawSavedScores = JSON.parse(localStorage.getItem('saveScores'));
+    let newSavedScoresObj = {}
     
-
+    //passing the rawSavedScores so that the parsing of data will change null to undefined.
+    for (let elem in rawSavedScores) {
+      newSavedScoresObj[elem] = rawSavedScores[elem] === null ? undefined : rawSavedScores[elem];
+    }
 
     if (savedDice !== null) {
       this.setState({
@@ -187,7 +190,7 @@ class Game extends Component {
         locked: savedLocked,
         rollsLeft: savedRollsLeft,
         isRolling: false,
-        scores: savedScores,
+        scores: newSavedScoresObj,
       })
     }
 
