@@ -52,6 +52,8 @@ This Yahtzee app was handed to me completely broken! I had to dig in, learn how 
 
 ![Preview of working code base - Yahtzee Game App](docs/preview.gif)
 
+[Click here](https://tyecampbell-yahtzee.netlify.com) to preview a live example. (Play speed Yahtzee with friends!)
+
 ### What I've Learned
 
 * Local storage uses JSON.stringify but it does not allow for undefined values. Had to Use a replacer function to clean the data. 
