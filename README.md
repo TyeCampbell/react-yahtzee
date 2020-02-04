@@ -45,7 +45,7 @@ Sadly, they didn’t get their full house. They could score this as:
 * Chance: for 15 points
 * Any other category they claimed on this round would score 0.
 
-##### My involvement in this project 
+#### My involvement in this project 
 This Yahtzee app was handed to me completely broken! I had to dig in, learn how it worked on my own, figure out what was wrong with the app and then fix it. I adjusted all the CSS to be responsive and cleaned up the overall look and feel. I added new features such as the Upper Bonus score (like the original game is played), bottom current score, dice icons, dice CSS animation, new game feature and finally saved state to local storage so that you could come back to your game in the same browser.
 
 ## My Finished Project
