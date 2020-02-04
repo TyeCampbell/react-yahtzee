@@ -45,12 +45,20 @@ Sadly, they didn’t get their full house. They could score this as:
 * Chance: for 15 points
 * Any other category they claimed on this round would score 0.
 
+##### My involvement in this project 
+This Yahtzee app was handed to me completely broken! I had to dig in, learn how it worked on my own, figure out what was wrong with the app and then fix it. I adjusted all the CSS to be responsive and cleaned up the overall look and feel. I added new features such as the Upper Bonus score (like the original game is played), bottom current score, dice icons, dice CSS animation, new game feature and finally saved state to local storage so that you could come back to your game in the same browser.
+
 ## My Finished Project
 
-![Preview of inital code base - Yahtzee Game App](docs/preview.gif)
+![Preview of working code base - Yahtzee Game App](docs/preview.gif)
 
 ### What I've Learned
 
-(Building In Progress...)
+* Local storage uses JSON.stringify but it does not allow for undefined values. Had to Use a replacer function to clean the data. 
+* Local storage getItem needs to be parsed with JSON.parse. This will not allow for undefined values. 
+* Used a for...in loop with the local storage parsed object to replace null values with undefined. 
+* Using a call back function with SetState to invoke a function immediately after the call. 
+* Sets are great as they allow comparison of items in an array. 
+
 
 :thumbsup: *Thanks for checking out my work on GitHub! For more about me find me on Twitter [@TyeDev](https://twitter.com/tyedev) or visit my personal website [TyeCampbell.com](www.TyeCampbell.com).*
